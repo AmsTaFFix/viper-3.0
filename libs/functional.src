@@ -1,7 +1,0 @@
-#import Error from "/new/error.gs"
-
-isIterable = function(item)
-    if typeof(item) == "map" then return true
-    if typeof(item) == "list" then return true
-    return false
-end function
