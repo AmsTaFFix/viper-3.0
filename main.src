@@ -1,7 +1,7 @@
 #import Error from "/new/error.gs"
 import_code("./libs/json.src")
 #import CommandManager from "/managers/command/command-manager.src"
-import_code("./managers/command/command.src")
+#import Command from "/managers/command/command.src"
 #import ExtensionMediator from "/mediator.src"
 #import SessionManager from "/managers/session/session-manager.src"
 import_code("./managers/session/session.src")

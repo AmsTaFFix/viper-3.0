@@ -1,8 +1,13 @@
 import_code("./jumpfile/jumpfile-text.src")
 import_code("./utils/random-ip.src")
-import_code("./managers/command/command.src")
+#import Command from "/managers/command/command.src"
 import_code("./managers/session/session.src")
 #import Fn from "/new/fn.gs"
+#import PARAMETER_TYPES from "/managers/command/parameter_types.gs"
+#import OptionsParameter from "/managers/command/options_parameter.gs"
+#import RestParameter from "/managers/command/rest_parameter.gs"
+#import FlagParameter from "/managers/command/flag_parameter.gs"
+#import Parameter from "/managers/command/parameter.gs"
 
 lsCommandHandler = function(params, extensionMediator)
     viperUi = extensionMediator.getExtension("viperUi")
