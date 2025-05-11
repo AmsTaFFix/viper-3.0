@@ -1,0 +1,5 @@
+FILE_TYPES = {}
+FILE_TYPES.FILE = "FILE"
+FILE_TYPES.FOLDER = "FOLDER"
+
+module.exports = FILE_TYPES

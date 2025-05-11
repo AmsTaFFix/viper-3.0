@@ -1,9 +1,6 @@
 #import Error from "/new/error.gs"
 #import Fn from "/new/fn.gs"
-
-FILE_TYPES = {}
-FILE_TYPES.FILE = "FILE"
-FILE_TYPES.FOLDER = "FOLDER"
+#import FILE_TYPES from "/facades/computer-objects/file_types.gs"
 
 File = {}
 File.file = null
@@ -122,3 +119,5 @@ File.New = function (file)
     result.file = file
     return result
 end function
+
+module.exports = File

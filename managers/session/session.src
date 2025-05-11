@@ -1,6 +1,6 @@
 #import Error from "/new/error.gs"
 
-import_code("../../facades/computer-objects/file.src")
+#import File from "/facades/computer-objects/file.src"
 import_code("../../facades/computer-objects/computer.src")
 import_code("../../facades/computer-objects/shell.src")
 import_code("../../facades/computer-objects/computer-object-factory.src")

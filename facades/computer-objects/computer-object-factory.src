@@ -1,6 +1,6 @@
-import_code("./file.src")
 import_code("./computer.src")
 import_code("./shell.src")
+#import File from "/facades/computer-objects/file.src"
 #import Error from "/new/error.gs"
 
 computerObjectFactory = function (object)

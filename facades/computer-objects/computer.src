@@ -1,6 +1,6 @@
 #import Error from "/new/error.gs"
 import_code("../../libs/ssv.src")
-import_code("./file.src")
+#import File from "/facades/computer-objects/file.src"
 
 Computer = {}
 Computer.computer = null

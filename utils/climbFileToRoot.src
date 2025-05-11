@@ -1,4 +1,4 @@
-import_code("../facades/computer-objects/file.src")
+#import File from "/facades/computer-objects/file.src"
 #import Error from "/new/error.gs"
 
 climbFileToRoot = function(file)
