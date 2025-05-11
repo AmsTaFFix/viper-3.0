@@ -81,3 +81,5 @@ Router.New = function(ip)
     if result.router == null then return Error.New("Invalid ip")
     return result
 end function
+
+module.exports = Router

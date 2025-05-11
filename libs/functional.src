@@ -17,7 +17,9 @@ forEach = function(list, callback)
             callback(v)
         end for
     end if
-    if isIterable(list) == false then return Error.New("Invalid Type")
+    if isIterable(list) == false then 
+        return Error.New("Invalid Type")
+    end if
 end function
 
 map = function(list, callback)

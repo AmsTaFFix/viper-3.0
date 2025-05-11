@@ -60,3 +60,5 @@ SessionManager.New = function ()
     result.sessionChain = []
     return result
 end function
+
+module.exports = SessionManager

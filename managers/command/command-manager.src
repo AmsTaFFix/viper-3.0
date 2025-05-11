@@ -105,3 +105,5 @@ CommandManager.New = function()
     result.history = []
     return result
 end function
+
+module.exports = CommandManager
