@@ -1,6 +1,7 @@
 import_code("../../facades/computer-objects/file.src")
 import_code("../../libs/functional.src")
-import_code("../theme/theme-manager.src")
+#import ThemeManager from "/managers/theme/theme-manager.src"
+#import THEME_COLORS from "/managers/theme/theme_colors.gs"
 
 COLORS = {
     "RED": "#c3201f",

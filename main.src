@@ -11,7 +11,7 @@ import_code("./managers/ui/viper-ui.src")
 import_code("./libs/functional.src")
 import_code("./facades/network/router.src")
 #import MacroManager from "/managers/macro/macro-manager.src"
-import_code("./managers/theme/theme-manager.src")
+#import ThemeManager from "/managers/theme/theme-manager.src"
 #import DictionaryManager from "/managers/dictionary/dictionary-manager.src"
 #import ConfigManager from "/managers/config/config-manager.src"
 

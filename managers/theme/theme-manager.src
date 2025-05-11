@@ -5,17 +5,6 @@ color = function(hex)
     return @result
 end function
 
-THEME_COLORS = {
-    "HIGHLIGHT": "highlight",
-    "TEXT": "text",
-    "SECONDARY": "secondary",
-    "WARNING": "warning",
-    "INFO": "info",
-    "SUCCESS": "success",
-    "DANGER": "danger",
-    "ERROR": "error",
-}
-
 ThemeManager = {}
 ThemeManager.mediator = null
 ThemeManager.colors = {
@@ -51,3 +40,5 @@ ThemeManager.New = function()
     result.colors = ThemeManager.colors
     return result
 end function
+
+module.exports = ThemeManager
