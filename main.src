@@ -10,10 +10,10 @@ import_code("./managers/lib/metaxploit-manager.src")
 import_code("./managers/ui/viper-ui.src")
 import_code("./libs/functional.src")
 import_code("./facades/network/router.src")
-import_code("./managers/macro/macro-manager.src")
+#import MacroManager from "/managers/macro/macro-manager.src"
 import_code("./managers/theme/theme-manager.src")
-import_code("./managers/dictionary/dictionary-manager.src")
-import_code("./managers/config/config-manager.src")
+#import DictionaryManager from "/managers/dictionary/dictionary-manager.src"
+#import ConfigManager from "/managers/config/config-manager.src"
 
 extensionMediator = ExtensionMediator.New()
 

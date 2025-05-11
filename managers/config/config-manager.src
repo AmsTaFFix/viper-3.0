@@ -54,3 +54,5 @@ ConfigManager.New = function()
     result = new ConfigManager
     return result
 end function
+
+module.exports = ConfigManager

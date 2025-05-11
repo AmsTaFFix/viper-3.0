@@ -51,3 +51,5 @@ DictionaryManager.New = function ()
     result.init()
     return result
 end function
+
+module.exports = DictionaryManager

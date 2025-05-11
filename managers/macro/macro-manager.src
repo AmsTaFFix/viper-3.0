@@ -51,3 +51,5 @@ MacroManager.New = function ()
     self.mediator = null
     return self
 end function
+
+module.exports = MacroManager
