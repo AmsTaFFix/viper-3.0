@@ -1,5 +1,3 @@
-import_code("./functional.src")
-
 #import Fn from "/new/fn.gs"
 
 ssvToList = function (csv)

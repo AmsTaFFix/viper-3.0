@@ -1,5 +1,4 @@
 #import Error from "/new/error.gs"
-import_code("../../libs/functional.src")
 import_code("../computer-objects/computer-object-factory.src")
 #import Fn from "/new/fn.gs"
 

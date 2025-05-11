@@ -1,5 +1,5 @@
-import_code("../../libs/functional.src")
 #import Error from "/new/error.gs"
+#import Fn from "/new/fn.gs"
 import_code("../../facades/lib-objects/metaxploit.src")
 import_code("../../facades/lib-objects/crypto.src")
 

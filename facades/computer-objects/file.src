@@ -1,6 +1,5 @@
 #import Error from "/new/error.gs"
 #import Fn from "/new/fn.gs"
-import_code("../../libs/functional.src")
 
 FILE_TYPES = {}
 FILE_TYPES.FILE = "FILE"

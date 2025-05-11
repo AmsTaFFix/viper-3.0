@@ -1,5 +1,5 @@
 #import Error from "/new/error.gs"
-import_code("../../libs/functional.src")
+#import Fn from "/new/fn.gs"
 
 PARAMETER_TYPES = {
     "STRING": "string",

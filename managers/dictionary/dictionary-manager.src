@@ -1,4 +1,3 @@
-import_code("../../libs/functional.src")
 #import Error from "/new/error.gs"
 #import Fn from "/new/fn.gs"
 import_code("./list-1.src")

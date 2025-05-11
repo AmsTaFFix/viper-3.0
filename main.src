@@ -8,7 +8,6 @@ import_code("./managers/session/session.src")
 import_code("./managers/lib/lib-manager.src")
 import_code("./managers/lib/metaxploit-manager.src")
 import_code("./managers/ui/viper-ui.src")
-import_code("./libs/functional.src")
 #import Router from "/facades/network/router.src"
 #import MacroManager from "/managers/macro/macro-manager.src"
 #import ThemeManager from "/managers/theme/theme-manager.src"
