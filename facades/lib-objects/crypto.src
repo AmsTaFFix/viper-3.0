@@ -13,3 +13,5 @@ Crypto.New = function(object)
     result.crypto = object
     return result
 end function
+
+module.exports = Crypto

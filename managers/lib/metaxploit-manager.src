@@ -1,4 +1,5 @@
 #import Error from "/new/error.gs"
+#import LIB_TYPES from "/managers/lib/lib_types.gs"
 import_code("./lib-manager.src")
 
 MetaxploitManager = {}
