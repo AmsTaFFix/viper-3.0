@@ -1,12 +1,13 @@
 #import Error from "/new/error.gs"
-
-isIterable = function(item)
+// @type Functions 
+Functions = {}
+Functions.isIterable = function(item)
     if typeof(item) == "map" then return true
     if typeof(item) == "list" then return true
     return false
 end function
 
-forEach = function(list, callback)
+Functions.forEach = function(list, callback)
     if typeof(list) == "map" then
         for v in list
             callback(v)
@@ -17,15 +18,15 @@ forEach = function(list, callback)
             callback(v)
         end for
     end if
-    if isIterable(list) == false then 
+    if Functions.isIterable(list) == false then 
         return Error.New("Invalid Type")
     end if
 end function
 
-map = function(list, callback)
+Functions.map = function(list, callback)
     if typeof(list) == "map" then newList = {}
     if typeof(list) == "list" then newList = []
-    if isIterable(list) == false then return Error.New("Invalid Type")
+    if Functions.isIterable(list) == false then return Error.New("Invalid Type")
     if typeof(list) == "map" then
         for item in list
             k = item.key
@@ -41,10 +42,10 @@ map = function(list, callback)
     return newList
 end function
 
-filter = function(list, callback)
+Functions.filter = function(list, callback)
     if typeof(list) == "map" then newList = {}
     if typeof(list) == "list" then newList = []
-    if isIterable(list) == false then return Error.New("Invalid Type")
+    if Functions.isIterable(list) == false then return Error.New("Invalid Type")
     for v in list
         if callback(v) then
             newList.push(v)
@@ -53,10 +54,10 @@ filter = function(list, callback)
     return newList
 end function
 
-find = function(list, callback)
+Functions.find = function(list, callback)
     if typeof(list) == "map" then newList = {}
     if typeof(list) == "list" then newList = []
-    if isIterable(list) == false then return Error.New("Invalid Type")
+    if Functions.isIterable(list) == false then return Error.New("Invalid Type")
     for v in list
         if callback(v) then
             return v
@@ -65,10 +66,10 @@ find = function(list, callback)
     return null
 end function
 
-reduce = function(list, callback, initialValue)
+Functions.reduce = function(list, callback, initialValue)
     if typeof(list) == "map" then newList = {}
     if typeof(list) == "list" then newList = []
-    if isIterable(list) == false then return Error.New("Invalid Type")
+    if Functions.isIterable(list) == false then return Error.New("Invalid Type")
     skipFirst = false
     if initialValue == null then skipFirst = true
     for v in list
@@ -82,10 +83,10 @@ reduce = function(list, callback, initialValue)
     return initialValue
 end function
 
-every = function(list, callback)
+Functions.every = function(list, callback)
     if typeof(list) == "map" then newList = {}
     if typeof(list) == "list" then newList = []
-    if isIterable(list) == false then return Error.New("Invalid Type")
+    if Functions.isIterable(list) == false then return Error.New("Invalid Type")
     for v in list
         if callback(v) == false then
             return false
@@ -94,10 +95,10 @@ every = function(list, callback)
     return true
 end function
 
-some = function(list, callback)
+Functions.some = function(list, callback)
     if typeof(list) == "map" then newList = {}
     if typeof(list) == "list" then newList = []
-    if isIterable(list) == false then return Error.New("Invalid Type")
+    if Functions.isIterable(list) == false then return Error.New("Invalid Type")
     for v in list
         if callback(v) then
             return true
@@ -106,12 +107,12 @@ some = function(list, callback)
     return false
 end function
 
-flat = function(list)
+Functions.flat = function(list)
     if typeof(list) == "list" then newList = []
-    if isIterable(list) == false then return Error.New("Invalid Type")
+    if Functions.isIterable(list) == false then return Error.New("Invalid Type")
     for v in list
         if typeof(v) == "list" then
-            l = flat(v)
+            l = Functions.flat(v)
             for i in l
                 newList.push(i)
             end for
@@ -121,3 +122,28 @@ flat = function(list)
     end for
     return newList
 end function
+
+Functions.distinct = function(list)
+    if typeof(list) == "map" then newList = {}
+    if typeof(list) == "list" then newList = []
+    if Functions.isIterable(list) == false then return Error.New("Invalid Type")
+    if typeof(list) == "map" then
+        for item in list
+            k = item.key
+            v = item.value
+            if not newList.hasIndex(k) then
+                newList[k] = v
+            end if
+        end for
+    end if
+    if typeof(list) == "list" then
+        for v in list
+            if newList.indexOf(v) == null then
+                newList.push(v)
+            end if
+        end for
+    end if
+    return newList
+end function
+
+module.exports = Functions

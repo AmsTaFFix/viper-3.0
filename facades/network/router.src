@@ -1,4 +1,5 @@
 #import Error from "/new/error.gs"
+#import Functions from "/new/functions.gs"
 import_code("../../libs/functional.src")
 
 Router = {}
@@ -58,7 +59,7 @@ Router.devices = function()
         return device.ports
     end function
     handleRemoveDublicates = function(device)
-        return distinct(device.value)
+        return Functions.distinct(device.value)
     end function
     handleFilterNullPorts = function(port)
         return port != null
