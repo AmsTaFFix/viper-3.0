@@ -23,7 +23,7 @@ SessionManager.removeSession = function (sessionIndex)
         outer.i = i + 1
         return oldI != sessionIndex
     end function
-    self.sessions = filter(self.sessions, @handleFilterSession)
+    self.sessions = Fn.filter(self.sessions, @handleFilterSession)
 end function
 SessionManager.setCurrentSession = function (sessionIndex)
     if hasIndex(self.sessions, sessionIndex) then

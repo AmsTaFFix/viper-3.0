@@ -56,7 +56,7 @@ test = function (name, callback)
 
     testStack.pop()
 
-    if filter(newTest.errors, @handleFilterOnlyFailTests).len > 0 and hasIndex(testStack, testStack.len - 1) then
+    if Fn.filter(newTest.errors, @handleFilterOnlyFailTests).len > 0 and hasIndex(testStack, testStack.len - 1) then
         error = TestError.New(ERROR_TYPES.TEST_FAIL, "❌ " +  name)
         error.errors = newTest.errors
         testStack[testStack.len - 1].errors.push(error)
@@ -67,7 +67,7 @@ test = function (name, callback)
     end if
 
     if testStack.len == 0 then
-        if filter(newTest.errors, @handleFilterOnlyFailTests).len == 0 then
+        if Fn.filter(newTest.errors, @handleFilterOnlyFailTests).len == 0 then
             print("✅ " + name)
         else
             print("❌ " + name)

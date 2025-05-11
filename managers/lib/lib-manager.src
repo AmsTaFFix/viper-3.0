@@ -70,8 +70,8 @@ LibManager.addLib = function(lib, data)
         metalib = lib.lib.getLib(data.path)
         if metalib == null then return Error.New("Metaxploit lib not found")
         lib.data.version = metalib.version
-    else if some(self.libs, @findMetaxploitOnIp) then
-        metaxploit = find(self.libs, @findMetaxploitOnIp)
+    else if Fn.some(self.libs, @findMetaxploitOnIp) then
+        metaxploit = Fn.find(self.libs, @findMetaxploitOnIp)
         if metaxploit == null then return Error.New("Metaxploit lib not found")
         metalib = metaxploit.lib.getLib(data.path)
         if metalib == null then return Error.New("Metaxploit lib not found")

@@ -577,7 +577,7 @@ exploitScanCommandHandler = function(params, extensionMediator)
             end for
             return false
         end function
-        device = find(devices, @handleFindPort)
+        device = Fn.find(devices, @handleFindPort)
         if device == null then return Error.New("Port is not open/found")
         localIp = device.key
         publicIp = address
@@ -690,7 +690,7 @@ libsCommandHandler = function(params, extensionMediator)
         handleSome = function(libsLib)
             if libsLib.value == lib then return true
         end function
-        return some(libs, @handleSome)
+        return Fn.some(libs, @handleSome)
     end function
 
     handleMapLibs = function(lib)
@@ -1070,7 +1070,7 @@ nukeCommandHandler = function(params, extensionMediator)
         if session.data.ip == currentSession.data.ip then return true
         return false
     end function
-    sessions = filter(sessionManager.sessions, @handleFilter)
+    sessions = Fn.filter(sessionManager.sessions, @handleFilter)
 
     currentHandler.delete("/")
     

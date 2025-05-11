@@ -36,7 +36,7 @@ Router.devices = function()
         handleHasPort = function(usedPort)
             return usedPort.get_lan_ip == port.local and usedPort.port_number == port.port
         end function
-        return some(forwardedPorts, @handleHasPort)
+        return Fn.some(forwardedPorts, @handleHasPort)
     end function
 
     getPortInfo = function(port)

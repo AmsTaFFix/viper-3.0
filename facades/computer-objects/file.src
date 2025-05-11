@@ -74,7 +74,7 @@ File.child = function (name)
     findChildrenHandler = function (child)
         return child.name() == name
     end function
-    result = find(children, @findChildrenHandler)
+    result = Fn.find(children, @findChildrenHandler)
     if result == null then return Error.New("Not able to find child")
     return result
 end function
