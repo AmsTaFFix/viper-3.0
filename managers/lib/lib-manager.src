@@ -1,6 +1,6 @@
 #import Error from "/new/error.gs"
 #import Fn from "/new/fn.gs"
-import_code("../../facades/lib-objects/metaxploit.src")
+#import Metaxploit from "/facades/lib-objects/metaxploit.src"
 #import Crypto from "/facades/lib-objects/crypto.src"
 #import LIB_TYPES from "/managers/lib/lib_types.gs"
 #import Lib from "/managers/lib/lib.gs"
@@ -24,20 +24,19 @@ LibManager.addLib = function(lib, data)
     if self.currentLibs[lib.type] == null then self.currentLibs[lib.type] = lib
     if self.pivotLibs[lib.type] == null then self.pivotLibs[lib.type] = lib
 
-    findMetaxploitOnIp = function(lib)
-        if lib.type == LIB_TYPES.METAXPLOIT and lib.ip.local == data.ip.local and lib.ip.public == data.ip.public then return true
-        return false
-    end function
     if lib.type == LIB_TYPES.METAXPLOIT then
         metalib = lib.lib.getLib(data.path)
         if metalib == null then return Error.New("Metaxploit lib not found")
         lib.data.version = metalib.version
-    else if Fn.some(self.libs, @findMetaxploitOnIp) then
-        metaxploit = Fn.find(self.libs, @findMetaxploitOnIp)
-        if metaxploit == null then return Error.New("Metaxploit lib not found")
-        metalib = metaxploit.lib.getLib(data.path)
-        if metalib == null then return Error.New("Metaxploit lib not found")
-        lib.data.version = metalib.version
+    else
+        for aLib in self.libs
+            if aLib.type == LIB_TYPES.METAXPLOIT and aLib.ip.local == data.ip.local and aLib.ip.public == data.ip.public then 
+                metalib = aLib.lib.getLib(data.path)
+                if metalib == null then return Error.New("Metaxploit lib not found")
+                lib.data.version = metalib.version
+                break
+            end if
+        end for
     end if
 end function
 LibManager.getLib = function(id)
@@ -72,3 +71,5 @@ LibManager.New = function()
     }
     return result
 end function
+
+module.exports = LibManager

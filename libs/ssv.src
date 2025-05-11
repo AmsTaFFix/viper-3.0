@@ -23,3 +23,5 @@ ssvToList = function (csv)
 
     return result
 end function
+
+module.exports = @ssvToList

@@ -54,11 +54,9 @@ Fn.filter = function(list, callback)
     return newList
 end function
 
-Fn.find = function(list, callback)
-    if typeof(list) == "map" then newList = {}
-    if typeof(list) == "list" then newList = []
-    if Fn.isIterable(list) == false then return Error.New("Invalid Type")
-    for v in list
+Fn.find = function(aList, callback)
+    if not Fn.isIterable(aList) then return Error.New("Invalid Type")
+    for v in aList
         if callback(v) then
             return v
         end if
@@ -96,8 +94,6 @@ Fn.every = function(list, callback)
 end function
 
 Fn.some = function(list, callback)
-    if typeof(list) == "map" then newList = {}
-    if typeof(list) == "list" then newList = []
     if Fn.isIterable(list) == false then return Error.New("Invalid Type")
     for v in list
         if callback(v) then

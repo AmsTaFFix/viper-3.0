@@ -1,5 +1,5 @@
 #import Error from "/new/error.gs"
-import_code("../computer-objects/computer-object-factory.src")
+#import computerObjectFactory from "/facades/computer-objects/computer-object-factory.src"
 #import Fn from "/new/fn.gs"
 
 Metaxploit = {}
@@ -74,3 +74,5 @@ Metaxploit.New = function (object)
     result.metaxploit = object
     return result
 end function
+
+module.exports = Metaxploit

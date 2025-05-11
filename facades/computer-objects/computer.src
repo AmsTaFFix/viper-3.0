@@ -1,5 +1,5 @@
 #import Error from "/new/error.gs"
-import_code("../../libs/ssv.src")
+#import ssvToList from "/libs/ssv.src"
 #import File from "/facades/computer-objects/file.src"
 
 Computer = {}
@@ -51,3 +51,5 @@ Computer.New = function(computer)
     result.computer = computer
     return result
 end function
+
+module.exports = Computer

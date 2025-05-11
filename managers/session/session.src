@@ -1,9 +1,9 @@
 #import Error from "/new/error.gs"
 
 #import File from "/facades/computer-objects/file.src"
-import_code("../../facades/computer-objects/computer.src")
-import_code("../../facades/computer-objects/shell.src")
-import_code("../../facades/computer-objects/computer-object-factory.src")
+#import Computer from "/facades/computer-objects/computer.src"
+#import Shell from "/facades/computer-objects/shell.src"
+#import computerObjectFactory from "/facades/computer-objects/computer-object-factory.src"
 
 import_code("./file.src")
 import_code("./computer.src")

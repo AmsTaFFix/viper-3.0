@@ -1,3 +1,8 @@
+#import Error from "/new/error.gs"
+#import Metaxploit from "/facades/lib-objects/metaxploit.src"
+#import Crypto from "/facades/lib-objects/crypto.src"
+#import LIB_TYPES from "/managers/lib/lib_types.gs"
+
 Lib = {}
 Lib.data = {
     "ip": null,

@@ -1,5 +1,5 @@
-import_code("./computer.src")
-import_code("./shell.src")
+#import Computer from "/facades/computer-objects/computer.src"
+#import Shell from "/facades/computer-objects/shell.src"
 #import File from "/facades/computer-objects/file.src"
 #import Error from "/new/error.gs"
 
@@ -9,3 +9,5 @@ computerObjectFactory = function (object)
     if typeof(object) == "shell" then return Shell.New(object)
     return Error.New("Invalid object type")
 end function
+
+module.exports = @computerObjectFactory

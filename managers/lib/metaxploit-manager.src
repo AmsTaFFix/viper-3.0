@@ -1,6 +1,6 @@
 #import Error from "/new/error.gs"
 #import LIB_TYPES from "/managers/lib/lib_types.gs"
-import_code("./lib-manager.src")
+#import LibManager from "/managers/lib/lib-manager.src"
 
 MetaxploitManager = {}
 MetaxploitManager.mediator = null
@@ -50,3 +50,5 @@ MetaxploitManager.New = function ()
     self.mediator = null
     return self
 end function
+
+module.exports = MetaxploitManager

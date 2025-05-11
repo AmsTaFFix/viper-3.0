@@ -1,5 +1,5 @@
 #import Error from "/new/error.gs"
-import_code("./computer.src")
+#import Computer from "/facades/computer-objects/computer.src"
 
 Shell = {}
 Shell.shell = null
@@ -35,3 +35,5 @@ Shell.New = function(shell)
     result.shell = shell
     return result
 end function
+
+module.exports = Shell
