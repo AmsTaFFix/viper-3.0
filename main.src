@@ -3,6 +3,7 @@ import_code("./libs/json.src")
 import_code("./managers/command/command-manager.src")
 import_code("./managers/command/command.src")
 import_code("./mediator.src")
+#import ExtensionMediator from "/mediator.src"
 import_code("./managers/session/session-manager.src")
 import_code("./managers/session/session.src")
 import_code("./managers/lib/lib-manager.src")
