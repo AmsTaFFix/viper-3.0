@@ -1,10 +1,12 @@
 import_code("./functional.src")
 
+#import Fn from "/new/fn.gs"
+
 ssvToList = function (csv)
     lineSplitter = function (line)
         return line.split(" ")
     end function
-    lines = map(csv.split("\n"), @lineSplitter)
+    lines = Fn.map(csv.split("\n"), @lineSplitter)
 
     names = []
     firstLine = lines.pull()

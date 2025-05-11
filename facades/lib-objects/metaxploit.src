@@ -1,13 +1,14 @@
 #import Error from "/new/error.gs"
 import_code("../../libs/functional.src")
 import_code("../computer-objects/computer-object-factory.src")
+#import Fn from "/new/fn.gs"
 
 Metaxploit = {}
 Metaxploit.metaxploit =  null
 Metaxploit.rShellList = function ()
     objects = self.metaxploit.rshell_server()
     if typeof(objects) == "string" then return Error.New(objects)
-    return map(objects, @computerObjectFactory)
+    return Fn.map(objects, @computerObjectFactory)
 end function
 Metaxploit.connectRShell = function (address, port)
     if not is_valid_ip(address) then return Error.New("Invalid IP address")
@@ -45,7 +46,7 @@ Metaxploit.hack = function(lib, options)
     handleFilter = function (vulnaribility)
         return vulnaribility != null
     end function
-    return flat(filter(map(vulnaribilities, @handleHack), @handleFilter))
+    return Fn.flat(Fn.filter(Fn.map(vulnaribilities, @handleHack), @handleFilter))
 end function
 Metaxploit.getVulnerabilities = function (lib)
     vulnaribleAreas = self.metaxploit.scan(lib)
@@ -66,7 +67,7 @@ Metaxploit.getVulnerabilities = function (lib)
     handleFilter = function (vulnaribleArea)
         return vulnaribleArea != null
     end function
-    return filter(map(vulnaribleAreas, @handleGetVulnerableString), @handleFilter)
+    return Fn.filter(Fn.map(vulnaribleAreas, @handleGetVulnerableString), @handleFilter)
 end function
 Metaxploit.New = function (object)
     if typeof(object) != "MetaxploitLib" then return Error.New("Object is not a MetaxploitLib")

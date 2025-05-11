@@ -1,5 +1,6 @@
 import_code("../../libs/functional.src")
 #import Error from "/new/error.gs"
+#import Fn from "/new/fn.gs"
 import_code("./list-1.src")
 import_code("./list-2.src")
 import_code("./list-3.src")
@@ -38,7 +39,7 @@ DictionaryManager.init = function ()
         allPasswords.push(password)
         allPasswords.push(lowerPass)
     end function
-    forEach(passwords, @handleLowerCase)
+    Fn.forEach(passwords, @handleLowerCase)
 
     DictionaryManager.passwords = allPasswords
     self.passwords = allPasswords

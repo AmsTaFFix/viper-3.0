@@ -1,4 +1,5 @@
 #import Error from "/new/error.gs"
+#import Fn from "/new/fn.gs"
 import_code("../../libs/functional.src")
 
 FILE_TYPES = {}
@@ -37,7 +38,7 @@ File.delete = function ()
         deleteChildrenHandler = function (child)
             return child.delete()
         end function
-        forEach(children, @deleteChildrenHandler)
+        Fn.forEach(children, @deleteChildrenHandler)
     end if
     if self.path() != "/" then return self.file.delete()
 end function
@@ -65,7 +66,7 @@ File.children = function ()
     makeAllChildrenFileHandler = function (child)
         return File.New(child)
     end function
-    return map(children, @makeAllChildrenFileHandler)
+    return Fn.map(children, @makeAllChildrenFileHandler)
 end function
 File.child = function (name)
     children = self.children()

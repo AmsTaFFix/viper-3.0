@@ -2,6 +2,7 @@ import_code("../../facades/computer-objects/file.src")
 import_code("../../libs/functional.src")
 #import ThemeManager from "/managers/theme/theme-manager.src"
 #import THEME_COLORS from "/managers/theme/theme_colors.gs"
+#import Error from "/new/error.gs"
 
 COLORS = {
     "RED": "#c3201f",
@@ -66,7 +67,7 @@ ViperUi.ls = function(children)
         }
         return result
     end function
-    items = map(children, @handleGetItem)
+    items = Fn.map(children, @handleGetItem)
 
     self.displayTable(keys, items)
 
@@ -103,7 +104,7 @@ ViperUi.targets = function (sessions)
         outer.i = outer.i + 1
         return result
     end function
-    items = map(sessions, @handleGetItem)
+    items = Fn.map(sessions, @handleGetItem)
 
     self.displayTable(keys, items)
 
@@ -160,7 +161,7 @@ ViperUi.libs = function (libs)
         outer.i = outer.i + 1
         return result
     end function
-    items = map(libs, @handleGetItem)
+    items = Fn.map(libs, @handleGetItem)
 
     self.displayTable(keys, items)
 
@@ -195,7 +196,7 @@ ViperUi.ps = function(processes)
         return result
     end function
 
-    items = map(processes, @handleGetItem)
+    items = Fn.map(processes, @handleGetItem)
     self.displayTable(keys, items)
 end function
 ViperUi.currentLibs = function (libs)
@@ -227,7 +228,7 @@ ViperUi.currentLibs = function (libs)
     filterNull = function(item)
         return item != null
     end function
-    items = filter(map(libs, @handleGetItem), @filterNull)
+    items = Fn.filter(Fn.map(libs, @handleGetItem), @filterNull)
 
     self.displayTable(keys, items)
     print()
@@ -278,7 +279,7 @@ ViperUi.nmap = function(devices, router)
         }
         return result
     end function
-    items = map(devices, @handleGetItem)
+    items = Fn.map(devices, @handleGetItem)
 
     print()
     print themeManager.colorText(THEME_COLORS.HIGHLIGHT, "IP: " + themeManager.colorText(THEME_COLORS.SUCCESS, router.ip.public))
@@ -317,7 +318,7 @@ ViperUi.msfConsole = function (shells)
         outer.i = outer.i + 1
         return result
     end function
-    items = map(shells, @handleGetItem)
+    items = Fn.map(shells, @handleGetItem)
 
     self.displayTable(keys, items)
 end function
@@ -401,7 +402,7 @@ ViperUi.help = function (commands)
         }
         return result
     end function
-    items = map(commands, @handleGetItem)
+    items = Fn.map(commands, @handleGetItem)
 
     self.displayTable(keys, items)
 end function
@@ -499,7 +500,7 @@ ViperUi.history = function(commands)
         outer.i = outer.i + 1
         return result
     end function
-    items = map(commands, @handleGetItem)
+    items = Fn.map(commands, @handleGetItem)
     items.reverse()
 
     self.displayTable(keys, items)

@@ -2,6 +2,7 @@ import_code("./jumpfile/jumpfile-text.src")
 import_code("./utils/random-ip.src")
 import_code("./managers/command/command.src")
 import_code("./managers/session/session.src")
+#import Fn from "/new/fn.gs"
 
 lsCommandHandler = function(params, extensionMediator)
     viperUi = extensionMediator.getExtension("viperUi")
@@ -414,7 +415,7 @@ nmapCommandHandler = function(params, extensionMediator)
             allPorts.push(port)
         end for
     end function
-    forEach(devices, @handleAddDevice)
+    Fn.forEach(devices, @handleAddDevice)
 
     allPorts.sort("port")
 
@@ -590,7 +591,7 @@ exploitScanCommandHandler = function(params, extensionMediator)
     handleAddSessionObject = function(object)
         sessionManager.addSession(object, { "ip": address })
     end function
-    forEach(objects, @handleAddSessionObject)
+    Fn.forEach(objects, @handleAddSessionObject)
 end function
 commandManager.registerCommand(Command.New({
     "name": "exploitscan",
@@ -699,7 +700,7 @@ libsCommandHandler = function(params, extensionMediator)
             "pivot": libsHasLib(pivotLibs, lib)
         }
     end function
-    viperUi.libs(map(libraries, @handleMapLibs))
+    viperUi.libs(Fn.map(libraries, @handleMapLibs))
 end function
 commandManager.registerCommand(Command.New({
     "name": "libs",
@@ -1119,7 +1120,7 @@ killCommandHandler = function(params, extensionMediator)
         handleKillProcess = function(process)
             currentHandler.closeProcess(process.PID)
         end function
-        forEach(processes, @handleKillProcess)
+        Fn.forEach(processes, @handleKillProcess)
     else
         result = currentHandler.closeProcess(pid)
         if result isa Error then return result
@@ -1258,19 +1259,19 @@ secureCommandHandler = function(params, extensionMediator)
             if file.name == "home" then return
             if file.name == "usr"  then
                 if not file.hasChild("bin") then return
-                forEach(file.child("bin").children, @handleSecureFile)
+                Fn.forEach(file.child("bin").children, @handleSecureFile)
                 return
             end if
             if file.name == "sudo" then return
             if file.name == "bin" then 
-                forEach(file.children, @handleSecureFile)
+                Fn.forEach(file.children, @handleSecureFile)
                 return
             end if
             file.setPermissions("o-rwx", true)
             file.setPermissions("g-rwx", true)
             file.setPermissions("u-rwx", true)
         end function
-        forEach(files, @handleSecureFile)
+        Fn.forEach(files, @handleSecureFile)
     else
         files = handler.getFile("/").children
         handleSecureFile = function(file)
@@ -1278,7 +1279,7 @@ secureCommandHandler = function(params, extensionMediator)
             file.setPermissions("g-rwx", true)
             file.setPermissions("u-rwx", true)
         end function
-        forEach(files, @handleSecureFile)
+        Fn.forEach(files, @handleSecureFile)
     end if
 end function
 commandManager.registerCommand(Command.New({
@@ -1335,7 +1336,7 @@ msfconsoleCommandHandler = function(params, extensionMediator)
     handleShellsToSession = function (shell)
         return Session.New(shell, {})
     end function
-    viperUi.msfConsole(map(shells, @handleShellsToSession))
+    viperUi.msfConsole(Fn.map(shells, @handleShellsToSession))
     input = user_input(viperUi.msfConsoleInput)
     inputNumber = to_int(input)
     if inputNumber >= shells.len() or typeof(inputNumber) == "string" or inputNumber < 0 then return Error.New("Invalid input") 

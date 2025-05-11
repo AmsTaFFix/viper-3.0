@@ -1,5 +1,5 @@
 #import Error from "/new/error.gs"
-#import Functions from "/new/functions.gs"
+#import Fn from "/new/fn.gs"
 import_code("../../libs/functional.src")
 
 Router = {}
@@ -29,7 +29,7 @@ Router.devices = function()
         result.ports = router.device_ports(device)
         return result
     end function
-    devicesWithPorts = map(ips, @handleGetDevicePorts)
+    devicesWithPorts = Fn.map(ips, @handleGetDevicePorts)
 
     forwardedPorts = router.used_ports()
     handleFindPortInUsedPorts = function(port)
@@ -59,13 +59,13 @@ Router.devices = function()
         return device.ports
     end function
     handleRemoveDublicates = function(device)
-        return Functions.distinct(device.value)
+        return Fn.distinct(device.value)
     end function
     handleFilterNullPorts = function(port)
         return port != null
     end function
-    devices = reduce(map(filter(flat(map(devicesWithPorts, @handleGetPorts)), @handleFilterNullPorts), @getPortInfo), @handleReduceDevicePorts, {})
-    devices = map(devices, @handleRemoveDublicates)
+    devices = Fn.reduce(Fn.map(Fn.filter(Fn.flat(Fn.map(devicesWithPorts, @handleGetPorts)), @handleFilterNullPorts), @getPortInfo), @handleReduceDevicePorts, {})
+    devices = Fn.map(devices, @handleRemoveDublicates)
 
     for ip in ips
         if not devices.hasIndex(ip) then devices[ip] = []
