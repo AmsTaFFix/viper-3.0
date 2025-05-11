@@ -1,7 +1,7 @@
 import_code("./file.src")
 import_code("./computer.src")
 import_code("./shell.src")
-import_code("../../libs/error.src")
+#import Error from "/new/error.gs"
 
 computerObjectFactory = function (object)
     if typeof(object) == "file" then return File.New(object)

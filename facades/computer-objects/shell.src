@@ -1,4 +1,4 @@
-import_code("../../libs/error.src")
+#import Error from "/new/error.gs"
 import_code("./computer.src")
 
 Shell = {}

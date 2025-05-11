@@ -1,4 +1,4 @@
-import_code("./error.src")
+#import Error from "/new/error.gs"
 
 isIterable = function(item)
     if typeof(item) == "map" then return true

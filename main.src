@@ -1,3 +1,4 @@
+#import Error from "/new/error.gs"
 import_code("./libs/json.src")
 import_code("./managers/command/command-manager.src")
 import_code("./managers/command/command.src")
@@ -6,7 +7,6 @@ import_code("./managers/session/session-manager.src")
 import_code("./managers/session/session.src")
 import_code("./managers/lib/lib-manager.src")
 import_code("./managers/lib/metaxploit-manager.src")
-import_code("./libs/error.src")
 import_code("./managers/ui/viper-ui.src")
 import_code("./libs/functional.src")
 import_code("./facades/network/router.src")

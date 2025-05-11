@@ -1,5 +1,5 @@
 import_code("../facades/computer-objects/file.src")
-import_code("../libs/error.src")
+#import Error from "/new/error.gs"
 
 climbFileToRoot = function(file)
     if not(file isa File) then Error.New("file is not a File")

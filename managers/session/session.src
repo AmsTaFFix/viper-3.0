@@ -1,4 +1,4 @@
-import_code("../../libs/error.src")
+#import Error from "/new/error.gs"
 
 import_code("../../facades/computer-objects/file.src")
 import_code("../../facades/computer-objects/computer.src")
