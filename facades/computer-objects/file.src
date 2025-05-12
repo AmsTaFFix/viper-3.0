@@ -59,10 +59,11 @@ end function
 File.children = function ()
     if self.type() == FILE_TYPES.FILE then return Error.New("Not able to get children of a file")
     children = self.file.get_files() + self.file.get_folders()
-    makeAllChildrenFileHandler = function (child)
-        return File.New(child)
-    end function
-    return Fn.map(children, @makeAllChildrenFileHandler)
+    childrenFiles = []
+    for v in children
+        childrenFiles.push(File.New(v))
+    end for
+    return childrenFiles
 end function
 File.child = function (name)
     children = self.children()

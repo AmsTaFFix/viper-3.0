@@ -521,3 +521,5 @@ ViperUi.New = function()
     ViperUi.singleton = new ViperUi
     return ViperUi.singleton
 end function
+
+module.exports = ViperUi

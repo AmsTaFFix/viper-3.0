@@ -6,12 +6,13 @@
 #import Session from "/managers/session/session.src"
 #import LibManager from "/managers/lib/lib-manager.src"
 #import MetaxploitManager from "/managers/lib/metaxploit-manager.src"
-import_code("./managers/ui/viper-ui.src")
+#import ViperUi from "/managers/ui/viper-ui.src"
 #import Router from "/facades/network/router.src"
 #import MacroManager from "/managers/macro/macro-manager.src"
 #import ThemeManager from "/managers/theme/theme-manager.src"
 #import DictionaryManager from "/managers/dictionary/dictionary-manager.src"
 #import ConfigManager from "/managers/config/config-manager.src"
+#import THEME_COLORS from "/managers/theme/theme_colors.gs"
 
 extensionMediator = ExtensionMediator.New()
 
