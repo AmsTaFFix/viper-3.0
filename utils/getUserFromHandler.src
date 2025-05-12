@@ -21,3 +21,5 @@ getUserFromHandler = function (handler)
     end if
     return "unknown"
 end function
+
+module.exports = @getUserFromHandler

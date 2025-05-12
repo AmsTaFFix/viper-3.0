@@ -1,7 +1,7 @@
-import_code("./jumpfile/jumpfile-text.src")
+#import jumpfileText from "/jumpfile/jumpfile-text.src"
 import_code("./utils/random-ip.src")
 #import Command from "/managers/command/command.src"
-import_code("./managers/session/session.src")
+#import Session from "/managers/session/session.src"
 #import Fn from "/new/fn.gs"
 #import PARAMETER_TYPES from "/managers/command/parameter_types.gs"
 #import OptionsParameter from "/managers/command/options_parameter.gs"

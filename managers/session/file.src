@@ -1,8 +1,8 @@
 #import Error from "/new/error.gs"
 #import FILE_TYPES from "/facades/computer-objects/file_types.gs"
-import_code("../../utils/string.src")
-import_code("../../utils/climbFileToRoot.src")
-import_code("../../utils/getUserFromHandler.src")
+#import String from "/new/string.gs"
+#import getUserFromHandler from "/utils/getUserFromHandler.src"
+#import climbFileToRoot from "/utils/climbFileToRoot.src"
 
 FileSession = {}
 FileSession.current = null
@@ -11,7 +11,7 @@ FileSession.getFile = function(path)
     startingPath = self.current
     pathToFollow = path.split("/")
 
-    if startsWith(path, "/") then
+    if String.startsWith(path, "/") then
         startingPath = self.root
         pathToFollow = slice(pathToFollow, 1)
     end if
@@ -112,7 +112,7 @@ FileSession.path = function()
     return self.current.path
 end function
 FileSession.isParentOf = function(path, childPath)
-    if startsWith(childPath, path) then return true
+    if String.startsWith(childPath, path) then return true
     return false
 end function
 FileSession.type = function()
@@ -130,3 +130,5 @@ FileSession.New = function(file)
 
     return result
 end function
+
+module.exports = FileSession

@@ -1,17 +1,20 @@
-parse = function(jsonString)
+// @type JSON
+JSON = {}
+JSON.parse = function(jsonString)
 	p = new Parser
 	return p.parse(jsonString)
 end function
-toJSON = function(value, compact=false, indent=0)
+
+JSON.toJSON = function(value, compact=false, indent=0)
 	if @value isa funcRef then return """<function>"""
 	if value == null then return "null"
 	if value isa number then return str(value)
-	if value isa string then return """" + escape(value) + """"
+	if value isa string then return """" + _escape(value) + """"
 	if value isa list then return _listToJSON(value, compact, indent)
 	if typeof(value) == "map" then return _mapToJSON(value, compact, indent)
 end function
 
-hexToInt = function(s)
+_hexToInt = function(s)
 	result = 0
 	for c in s
 		result = result * 16 + _hexDigitMap[c]
@@ -19,14 +22,14 @@ hexToInt = function(s)
 	return result
 end function
 
-escape = function(s)
+_escape = function(s)
 	for i in _escapeIndexes
 		s = s.replace(_escapeFrom[i], _escapeTo[i])
 	end for
 	return s
 end function
 
-unescape = function(s)
+_unescape = function(s)
 	result = []
 	i = 0
 	maxi = s.len
@@ -47,7 +50,7 @@ unescape = function(s)
 				result.push char(13)
 			else if c == "u" then
 				hex = s[i+2:i+6]
-				result.push char(hexToInt(hex))
+				result.push char(_hexToInt(hex))
 				di = 6
 			else
 				result.push c
@@ -180,7 +183,7 @@ Parser._parseString = function()
 		end if
 	end while
 	result = self.source[startPos : self._p-1]
-	if anyEscape then result = unescape(result)
+	if anyEscape then result = _unescape(result)
 	return result
 end function
 
@@ -204,7 +207,7 @@ _listToJSON = function(lst, compact, indent)
 			parts.push ","
 			parts.push ws
 		end if
-		parts.push toJSON(item, compact, indent+1)
+		parts.push JSON.toJSON(item, compact, indent+1)
 		first = false
 	end for
 	if not compact then parts.push _eol + "  " * indent
@@ -221,10 +224,10 @@ _mapToJSON = function(lst, compact, indent)
 			parts.push ","
 			parts.push ws
 		end if
-		parts.push toJSON(str(kv.key))
+		parts.push JSON.toJSON(str(kv.key))
 		parts.push ":"
 		if not compact then parts.push " "
-		parts.push toJSON(@kv.value, compact, indent+1)
+		parts.push JSON.toJSON(@kv.value, compact, indent+1)
 		first = false
 	end for
 	if not compact then parts.push _eol + "  " * indent
@@ -246,3 +249,5 @@ end for
 _escapeFrom = ["\\", """", char(8), char(9), char(10), char(12), char(13)]
 _escapeTo = ["\\", "\""", "\b","\t","\n","\f","\r"]
 _escapeIndexes = _escapeFrom.indexes
+
+module.exports = JSON

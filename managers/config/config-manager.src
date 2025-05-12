@@ -1,5 +1,5 @@
-import_code("../../libs/json.src")
 #import Error from "/new/error.gs"
+#import JSON from "/libs/json.src"
 
 ConfigManager = {}
 ConfigManager.mediator = null
@@ -12,7 +12,7 @@ ConfigManager.saveConfigToFile = function ()
     file = self.getConfigFile()
     if file isa Error then return file
 
-    file.setContent(toJSON(self.config))
+    file.setContent(JSON.toJSON(self.config))
 end function
 ConfigManager.init = function ()
     file = self.getConfigFile()
@@ -23,7 +23,7 @@ ConfigManager.init = function ()
         file.setContent("{}")
         config = file.content()
     end if
-    self.config = parse(config)
+    self.config = JSON.parse(config)
 end function
 ConfigManager.getConfigFile = function ()
     sessionManager = self.mediator.getExtension("sessionManager")

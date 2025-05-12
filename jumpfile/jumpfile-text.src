@@ -30,3 +30,5 @@ else if type == ""getLib"" then
     result = getLib(path)
     get_custom_object.lib = result
 end if"
+
+module.exports = jumpfileText

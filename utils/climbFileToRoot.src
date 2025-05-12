@@ -9,3 +9,5 @@ climbFileToRoot = function(file)
     end while
     return current
 end function
+
+module.exports = @climbFileToRoot

@@ -1,6 +1,6 @@
 #import Error from "/new/error.gs"
 #import Fn from "/new/fn.gs"
-import_code("./session.src")
+#import Session from "/managers/session/session.src"
 
 SessionManager = {}
 SessionManager.mediator = null

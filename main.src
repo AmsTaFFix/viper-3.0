@@ -1,10 +1,9 @@
 #import Error from "/new/error.gs"
-import_code("./libs/json.src")
 #import CommandManager from "/managers/command/command-manager.src"
 #import Command from "/managers/command/command.src"
 #import ExtensionMediator from "/mediator.src"
 #import SessionManager from "/managers/session/session-manager.src"
-import_code("./managers/session/session.src")
+#import Session from "/managers/session/session.src"
 #import LibManager from "/managers/lib/lib-manager.src"
 #import MetaxploitManager from "/managers/lib/metaxploit-manager.src"
 import_code("./managers/ui/viper-ui.src")

@@ -1,13 +1,11 @@
 #import Error from "/new/error.gs"
-
 #import File from "/facades/computer-objects/file.src"
 #import Computer from "/facades/computer-objects/computer.src"
 #import Shell from "/facades/computer-objects/shell.src"
 #import computerObjectFactory from "/facades/computer-objects/computer-object-factory.src"
-
-import_code("./file.src")
-import_code("./computer.src")
-import_code("./shell.src")
+#import FileSession from "/managers/session/file.src"
+#import ComputerSession from "/managers/session/computer.src"
+#import ShellSession from "/managers/session/shell.src"
 
 Session = {}
 Session.handler = null
@@ -46,3 +44,5 @@ Session.New = function (handler, data)
 
     return result
 end function
+
+module.exports = Session
