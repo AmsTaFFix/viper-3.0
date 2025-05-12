@@ -10,7 +10,7 @@
 #import Router from "/facades/network/router.src"
 #import MacroManager from "/managers/macro/macro-manager.src"
 #import ThemeManager from "/managers/theme/theme-manager.src"
-#import DictionaryManager from "/managers/dictionary/dictionary-manager.src"
+// #import DictionaryManager from "/managers/dictionary/dictionary-manager.src"
 #import ConfigManager from "/managers/config/config-manager.src"
 #import THEME_COLORS from "/managers/theme/theme_colors.gs"
 
@@ -26,8 +26,8 @@ metaxploitManager = MetaxploitManager.New()
 extensionMediator.addExtension("metaxploitManager", metaxploitManager)
 macroManager = MacroManager.New()
 extensionMediator.addExtension("macroManager", macroManager)
-dictionaryManager = DictionaryManager.New()
-extensionMediator.addExtension("dictionaryManager", dictionaryManager)
+// dictionaryManager = DictionaryManager.New()
+// extensionMediator.addExtension("dictionaryManager", dictionaryManager)
 themeManager = ThemeManager.New()
 extensionMediator.addExtension("themeManager", themeManager)
 viperUi = ViperUi.New()
@@ -94,7 +94,9 @@ main = function()
     commandManager.run()
 
     dictionaryManager = extensionMediator.getExtension("dictionaryManager")
-    dictionaryManager.reset()
+    if dictionaryManager then
+        dictionaryManager.reset()
+    end if
 
     sessionManager = extensionMediator.getExtension("sessionManager")
 

@@ -5,7 +5,10 @@ ExtensionMediator.addExtension = function (name, extension)
   extension.setMediator(self)
 end function
 ExtensionMediator.getExtension = function (name)
-  return self.extensions[name]
+  if self.extensions.hasIndex(name) then
+    return self.extensions[name]
+  end if
+  return null
 end function
 ExtensionMediator.removeExtension = function (name)
   self.extensions[name] = null

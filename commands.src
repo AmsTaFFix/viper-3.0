@@ -1,5 +1,5 @@
 #import jumpfileText from "/jumpfile/jumpfile-text.src"
-import_code("./utils/random-ip.src")
+#import randomIp from "/utils/random-ip.src"
 #import Command from "/managers/command/command.src"
 #import Session from "/managers/session/session.src"
 #import Fn from "/new/fn.gs"
