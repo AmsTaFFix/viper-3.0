@@ -1,6 +1,6 @@
-#import Error from "/new/error.gs"
-#import Fn from "/new/fn.gs"
-#import PARAMETER_TYPES from "/managers/command/parameter_types.gs"
+#import Error from "/new/error.gs";
+#import Fn from "/new/fn.gs";
+#import PARAMETER_TYPES from "/managers/command/parameter_types.gs";
 
 Command = {}
 Command.name = null
@@ -8,59 +8,60 @@ Command.description = null
 Command.parameters = []
 Command.callback = null
 Command.permissions = {
-    "object": "file",
-    "privilege": "guest"
+  "object": "file",
+  "privilege": "guest",
 }
 Command.execute = function(args, mediator)
-    parameters = self.parseArgsToParameters(args.split(" "))
-    if parameters isa Error then return parameters
-    return self.callback(parameters, mediator)
+  parameters = self.parseArgsToParameters(args.split(" "))
+  if parameters isa Error then return parameters
+  return self.callback(parameters, mediator)
 end function
-Command.help = function()
-    help = self.name + " "
-    for param in self.parameters
-        if param.required then help = help +  "<" + param.name + "> "
-        if not(param.required) then help = help + "[" + param.name + "] "
-    end for
-    help = help + self.description
-    return help
+Command.help = function
+  help = self.name + " "
+  for param in self.parameters
+    if param.required then help = help + "<" + param.name + "> "
+    if not (param.required) then help = help + "[" + param.name + "] "
+  end for
+  help += self.description
+  return help
 end function
 Command.parseArgsToParameters = function(args)
-    parameters = {}
-    handleRemoveEmpty = function(value)
-        return value != ""
-    end function
-    args = Fn.filter(args, @handleRemoveEmpty)
-    if self.parameters.len() == 0 then return parameters
-    index = 0
-    for parameter in self.parameters
-        results = parameter.handle(args, index)
-        if results isa Error then return results
-        result = results[0]
-        index = results[1]
-        parameters[parameter.name] = result
-    end for
-    return parameters
+  parameters = {}
+  handleRemoveEmpty = function(value)
+    return value != ""
+  end function
+  args = Fn.filter(args, @handleRemoveEmpty)
+  if self.parameters.len == 0 then return parameters
+  index = 0
+  for parameter in self.parameters
+    results = parameter.handle(args, index)
+    if results isa Error then return results
+    result = results[0]
+    index = results[1]
+    parameters[parameter.name] = result
+  end for
+  return parameters
 end function
+
 Command.New = function(options)
-    command = new Command
-    if options.hasIndex("name") then command.name = options.name
-    if not options.hasIndex("name") then return Error.New("Missing required parameter: name")
-    if options.hasIndex("description") then command.description = options.description
-    if not options.hasIndex("description") then command.description = ""
-    if options.hasIndex("parameters") then command.parameters = options.parameters
-    if not options.hasIndex("parameters") then command.parameters = []
-    if options.hasIndex("callback") then command.callback = @options.callback
-    if not options.hasIndex("callback") then return Error.New("Missing required parameter: callback")
-    if options.hasIndex("permissions") then command.permissions = {
-        "object": "file",
-        "privilege": "guest"
-    } + options.permissions
-    if not options.hasIndex("permissions") then command.permissions = {
-        "object": "file",
-        "privilege": "guest"
-    }
-    return command
+  command = new Command
+  if options.hasIndex("name") then command.name = options.name
+  if not options.hasIndex("name") then return Error.New("Missing required parameter: name")
+  if options.hasIndex("description") then command.description = options.description
+  if not options.hasIndex("description") then command.description = ""
+  if options.hasIndex("parameters") then command.parameters = options.parameters
+  if not options.hasIndex("parameters") then command.parameters = []
+  if options.hasIndex("callback") then command.callback = @options.callback
+  if not options.hasIndex("callback") then return Error.New("Missing required parameter: callback")
+  if options.hasIndex("permissions") then command.permissions = {
+    "object": "file",
+    "privilege": "guest",
+  } + options.permissions
+  if not options.hasIndex("permissions") then command.permissions = {
+    "object": "file",
+    "privilege": "guest",
+  }
+  return command
 end function
 
 module.exports = Command

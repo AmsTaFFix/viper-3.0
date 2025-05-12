@@ -35,7 +35,7 @@ extensionMediator.addExtension("viperUi", viperUi)
 configManager = ConfigManager.New()
 extensionMediator.addExtension("configManager", configManager)
 
-import_code("./commands.src")
+import_code("/commands.src")
 
 init = function()
     viperUi = extensionMediator.getExtension("viperUi")
