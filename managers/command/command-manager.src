@@ -1,6 +1,7 @@
 #import Error from "/new/error.gs"
 #import Fn from "/new/fn.gs"
 
+// @type CommandManager
 CommandManager = {}
 CommandManager.commands = {}
 CommandManager.aliases = {}
@@ -97,6 +98,8 @@ end function
 CommandManager.removeAlias = function(alias)
     self.aliases.remove(alias)
 end function
+
+// @return {CommandManager}
 CommandManager.New = function()
     result = new CommandManager
     result.commands = {}

@@ -2,12 +2,14 @@
 #import Fn from "/new/fn.gs"
 #import Session from "/managers/session/session.src"
 
+// @type SessionManager
 SessionManager = {}
 SessionManager.mediator = null
 SessionManager.sessions = []
 SessionManager.sessionChain = []
 SessionManager.currentSession = null
 SessionManager.pivotSession = null
+
 SessionManager.addSession = function (object, data)
     session = Session.New(object, data)
     if session isa Error then return session
@@ -54,6 +56,8 @@ end function
 SessionManager.setMediator = function (mediator)
     self.mediator = mediator
 end function
+
+// @return {SessionManager}
 SessionManager.New = function ()
     result = new SessionManager
     result.sessions = []

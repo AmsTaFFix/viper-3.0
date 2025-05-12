@@ -13,6 +13,7 @@
 // #import DictionaryManager from "/managers/dictionary/dictionary-manager.src"
 #import ConfigManager from "/managers/config/config-manager.src"
 #import THEME_COLORS from "/managers/theme/theme_colors.gs"
+#import WiFiNetworksCMD from "/cmd/viper/cmd/wifi_networks.gs"
 
 extensionMediator = ExtensionMediator.New()
 
@@ -36,6 +37,7 @@ configManager = ConfigManager.New()
 extensionMediator.addExtension("configManager", configManager)
 
 import_code("/commands.src")
+commandManager.registerCommand(WiFiNetworksCMD.New(viperUi, sessionManager))
 
 init = function()
     viperUi = extensionMediator.getExtension("viperUi")

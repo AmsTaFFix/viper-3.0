@@ -14,8 +14,16 @@ Command.permissions = {
 Command.execute = function(args, mediator)
   parameters = self.parseArgsToParameters(args.split(" "))
   if parameters isa Error then return parameters
-  return self.callback(parameters, mediator)
+  if @self.callback then
+    return self.callback(parameters, mediator)
+  else if @self.handle then
+    return self.handle(parameters)
+  else
+    print("no callback or handle function defined")
+  end if
+  
 end function
+
 Command.help = function
   help = self.name + " "
   for param in self.parameters
@@ -44,24 +52,28 @@ Command.parseArgsToParameters = function(args)
 end function
 
 Command.New = function(options)
-  command = new Command
-  if options.hasIndex("name") then command.name = options.name
+  command = new self
+  command._new(options)
+  return command
+end function
+
+Command._new = function(options)
+  if options.hasIndex("name") then self.name = options.name
   if not options.hasIndex("name") then return Error.New("Missing required parameter: name")
-  if options.hasIndex("description") then command.description = options.description
-  if not options.hasIndex("description") then command.description = ""
-  if options.hasIndex("parameters") then command.parameters = options.parameters
-  if not options.hasIndex("parameters") then command.parameters = []
-  if options.hasIndex("callback") then command.callback = @options.callback
+  if options.hasIndex("description") then self.description = options.description
+  if not options.hasIndex("description") then self.description = ""
+  if options.hasIndex("parameters") then self.parameters = options.parameters
+  if not options.hasIndex("parameters") then self.parameters = []
+  if options.hasIndex("callback") then self.callback = @options.callback
   if not options.hasIndex("callback") then return Error.New("Missing required parameter: callback")
-  if options.hasIndex("permissions") then command.permissions = {
+  if options.hasIndex("permissions") then self.permissions = {
     "object": "file",
     "privilege": "guest",
   } + options.permissions
-  if not options.hasIndex("permissions") then command.permissions = {
+  if not options.hasIndex("permissions") then self.permissions = {
     "object": "file",
     "privilege": "guest",
   }
-  return command
 end function
 
 module.exports = Command
