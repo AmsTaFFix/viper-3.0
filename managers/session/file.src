@@ -8,6 +8,7 @@ FileSession = {}
 FileSession.current = null
 FileSession.root = null
 
+// @param {file} file
 FileSession.New = function(file)
     obj = new self
 
