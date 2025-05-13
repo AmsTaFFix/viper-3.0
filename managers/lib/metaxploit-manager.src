@@ -2,6 +2,7 @@
 #import LIB_TYPES from "/managers/lib/lib_types.gs"
 #import LibManager from "/managers/lib/lib-manager.src"
 
+// @type MetaxploitManager
 MetaxploitManager = {}
 MetaxploitManager.mediator = null
 MetaxploitManager.rShellList = function ()
@@ -22,6 +23,10 @@ MetaxploitManager.getLib = function (address, port)
     currentMetaxploit = libManager.getCurrentLib(LIB_TYPES.METAXPLOIT).lib
     return currentMetaxploit.getLib(address, port)
 end function
+
+// @param {string} address
+// @param {number} port
+// @param {string} options
 MetaxploitManager.hack = function (address, port, options)
     libManager = self.mediator.getExtension("libManager")
     if libManager.getCurrentLib(LIB_TYPES.METAXPLOIT) == null then return Error.New("No metaxploit library loaded")

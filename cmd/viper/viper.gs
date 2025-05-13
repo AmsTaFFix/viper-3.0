@@ -16,6 +16,7 @@
 
 #import WiFiLSCMD from "/cmd/viper/cmd/wifils.gs"
 #import WiFiCrackCMD from "/cmd/viper/cmd/wificrack.gs"
+#import ExploitScanCMD from "/cmd/viper/cmd/exploitscan.gs"
 
 // quickfix
 #import computerObjectFactory from "/facades/computer-objects/computer-object-factory.src"
@@ -45,6 +46,7 @@ printer = Printer.New(themeManager)
 import_code("/commands.src")
 commandManager.registerCommand(WiFiLSCMD.New(viperUi, sessionManager, themeManager))
 commandManager.registerCommand(WiFiCrackCMD.New(viperUi, sessionManager, themeManager, libManager, printer, configManager))
+commandManager.registerCommand(ExploitScanCMD.New(viperUi, sessionManager, themeManager, libManager, printer, configManager, metaxploitManager))
 
 init = function()
     viperUi = extensionMediator.getExtension("viperUi")

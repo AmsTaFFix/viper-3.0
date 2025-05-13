@@ -555,68 +555,6 @@ commandManager.registerCommand(Command.New({
     }
 }))
 
-exploitScanCommandHandler = function(params, extensionMediator)
-    address = params.address
-    port = params.port
-    options = params.options
-
-    metaxploitManager = extensionMediator.getExtension("metaxploitManager")
-    objects = metaxploitManager.hack(address, port, options)
-    if objects isa Error then return objects
-
-    if not is_valid_ip(address) then
-        libManager = extensionMediator.getExtension("libManager")
-        lib = libManager.getCurrentLib("metaxploit")
-        address = lib.data.ip
-    else
-        if is_lan_ip(address) then address = libManager.getCurrentLib("metaxploit").data.ip.public
-        if port == null then return Error.New("Port is required")
-        router = Router.New(address)
-        if router isa Error then return router
-        devices = router.devices()
-
-        handleFindPort = function(device)
-            for p in device.value
-                if (p.open or p.port == 8080) and p.port == to_int(port) then return true
-            end for
-            return false
-        end function
-        device = Fn.find(devices, @handleFindPort)
-        if device == null then return Error.New("Port is not open/found")
-        localIp = device.key
-        publicIp = address
-        address = {
-            "local": device.key,
-            "public": publicIp
-        }
-    end if
-
-    sessionManager = extensionMediator.getExtension("sessionManager")
-    handleAddSessionObject = function(object)
-        sessionManager.addSession(object, { "ip": address })
-    end function
-    Fn.forEach(objects, @handleAddSessionObject)
-end function
-commandManager.registerCommand(Command.New({
-    "name": "exploitscan",
-    "description": "Scan the network for exploits",
-    "parameters": [
-        Parameter.New({
-            "name": "address",
-            "required": true
-        }),
-        Parameter.New({
-            "name": "port",
-            "required": false
-        }),
-        Parameter.New({
-            "name": "options",
-            "required": false
-        })
-    ],
-    "callback": @exploitScanCommandHandler
-}))
-
 targetsCommandHandler = function(params, extensionMediator)
     viperUi = extensionMediator.getExtension("viperUi")
     sessionManager = extensionMediator.getExtension("sessionManager")
