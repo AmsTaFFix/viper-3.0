@@ -49,12 +49,7 @@ commandManager.registerCommand(WiFiCrackCMD.New(viperUi, sessionManager, themeMa
 commandManager.registerCommand(ExploitScanCMD.New(viperUi, sessionManager, themeManager, libManager, printer, configManager, metaxploitManager))
 
 init = function()
-    viperUi = extensionMediator.getExtension("viperUi")
-    sessionManager = extensionMediator.getExtension("sessionManager")
-    libManager = extensionMediator.getExtension("libManager")
     sessionManager.addSession(get_shell())
-
-    libManager = extensionMediator.getExtension("libManager")
     metaxploit = sessionManager.currentSession.handler.getFile("metaxploit.so")
     if metaxploit isa Error then metaxploit = sessionManager.currentSession.handler.getFile("/lib/metaxploit.so")
     if not (metaxploit isa Error) then
@@ -100,19 +95,13 @@ init = function()
 end function
 
 main = function()
-    viperUi = extensionMediator.getExtension("viperUi")
-    commandManager = extensionMediator.getExtension("commandManager")
     commandManager.run()
 
     dictionaryManager = extensionMediator.getExtension("dictionaryManager")
     if dictionaryManager then
         dictionaryManager.reset()
     end if
-
-    sessionManager = extensionMediator.getExtension("sessionManager")
-
     userInput = user_input(viperUi.displaySession(sessionManager.currentSession))
-
     result = commandManager.executeCommand(userInput)
 end function
 
