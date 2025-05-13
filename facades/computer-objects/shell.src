@@ -1,6 +1,7 @@
 #import Error from "/new/error.gs"
 #import Computer from "/facades/computer-objects/computer.src"
 
+// @type Shell
 Shell = {}
 Shell.shell = null
 
