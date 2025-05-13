@@ -12,10 +12,10 @@ SessionManager.sessionChain = []
 SessionManager.currentSession = null
 SessionManager.pivotSession = null
 
-// @param {Session|File|Computer|Shell} object
-SessionManager.addSession = function (object, data)
-    session = Session.New(object, data)
-    if session isa Error then return session
+// @param {Session} session
+SessionManager.addSession = function (session)
+    if not session isa Session then Error.Panic("Session is not a Session", #filename, #line)
+
     self.sessions.push(session)
     if self.currentSession == null then self.setCurrentSession(0)
     if self.pivotSession == null then self.setPivotSession(0)

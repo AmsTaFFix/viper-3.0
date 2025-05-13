@@ -36,12 +36,12 @@ end function
 // @param {ConfigManager} configManager
 // @return {WiFiCrackCMD}
 WiFiCrackCMD._new = function(viperUi, sessionManager, themeManager, libManager, printer, configManager)
-  if not printer then Error.panic("Printer is required", #filename, #line)
-  if not sessionManager then Error.panic("SessionManager is required", #filename, #line)
-  if not viperUi then Error.panic("ViperUi is required", #filename, #line)
-  if not themeManager then Error.panic("ThemeManager is required", #filename, #line)
-  if not libManager then Error.panic("LibManager is required", #filename, #line)
-  if not configManager then Error.panic("ConfigManager is required", #filename, #line)
+  if not printer then Error.Panic("Printer is required", #filename, #line)
+  if not sessionManager then Error.Panic("SessionManager is required", #filename, #line)
+  if not viperUi then Error.Panic("ViperUi is required", #filename, #line)
+  if not themeManager then Error.Panic("ThemeManager is required", #filename, #line)
+  if not libManager then Error.Panic("LibManager is required", #filename, #line)
+  if not configManager then Error.Panic("ConfigManager is required", #filename, #line)
 
   super._new({
     "name": "wificrack",

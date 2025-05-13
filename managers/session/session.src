@@ -14,41 +14,58 @@ Session.handler = null
 Session.data = {
     "ip": null
 }
-// @param {Session|File|Computer|Shell} handler
+// @param {Session|File|Computer|Shell|file|computer|shell} object
 // @return {Session|Error}
-Session.New = function (handler, data)
-    if handler isa Session then return handler
-    result = new Session
-    
-    if typeof(handler) == "file" then 
-        handler = computerObjectFactory(handler)
-    else if typeof(handler) == "computer" then 
-        handler = computerObjectFactory(handler)
-    else if typeof(handler) == "shell" then 
-        handler = computerObjectFactory(handler)
+Session.New = function (object, data)
+    if typeof(object) == "file" then 
+        object = computerObjectFactory(object)
+    else if typeof(object) == "computer" then 
+        object = computerObjectFactory(object)
     end if
 
-    if handler isa File then 
-        handler = FileSession.New(handler)
-    else if handler isa Computer then 
-        handler = ComputerSession.New(handler)
-    else if handler isa Shell then 
-        handler = ShellSession.New(handler)
+    if object isa File then 
+        object = FileSession.New(object)
+    else if object isa Computer then 
+        object = ComputerSession.New(object)
     end if
 
-    if not(handler isa ShellSession) and not(handler isa ComputerSession) and not(handler isa FileSession) then 
-        return Error.New("Invalid session handler")
+    if not(object isa ComputerSession) and not(object isa FileSession) then 
+        print(object)
+        Error.Panic("Invalid session object", #filename, #line)
     end if
 
-    result.handler = handler
+    result = new self
+
+    result.handler = object
     result.data = data
 
-    if handler isa ComputerSession or handler isa ShellSession then
+    if object isa ComputerSession then
         result.data = {}
-        result.data.ip = handler.ip
-    else if handler isa FileSession and data.ip == null then
-        return Error.New("File session requires ip")
+        result.data.ip = object.ip
+    else if object isa FileSession and data.ip == null then
+        Error.Panic("File session requires ip", #filename, #line)
     end if
+
+    if object.user == "root" then
+        object.goTo("/root")
+    else
+        object.goTo("/home/" + object.user)
+    end if
+
+    return result
+end function
+
+// @param {Shell} shell
+// @return {Session|Error}
+Session.WrapShell = function(shell)
+    if not shell isa Shell then return Error.Panic("Invalid Shell", #filename, #line)
+    handler = ShellSession.New(shell)
+    
+    result = new self
+    result.handler = handler
+    result.data = {
+        "ip": result.handler.ip
+    }
 
     if handler.user == "root" then
         handler.goTo("/root")

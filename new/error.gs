@@ -12,7 +12,7 @@ Error.New = function(message)
   return result
 end function
 
-Error.panic = function(message, filename = "unknown.gs", line = "0")
+Error.Panic = function(message, filename = "unknown.gs", line = "0")
   exit("[" + filename + ":" + line + "] " + message)
 end function
 

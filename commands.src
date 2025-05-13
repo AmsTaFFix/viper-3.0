@@ -481,10 +481,10 @@ sshCommandHandler = function(params, extensionMediator)
     port = params.port
     service = params.service
 
-    result = handler.connectTo(ip, port, username, password, service)
-    if result isa Error then return result
+    shell = handler.connectTo(ip, port, username, password, service)
+    if shell isa Error then return shell
 
-    session = sessionManager.addSession(result, {})
+    session = sessionManager.addSession(Session.WrapShell(shell))
     sessionManager.setCurrentSession(sessionManager.getSessionIndex(session))
 end function
 commandManager.registerCommand(Command.New({
@@ -868,7 +868,7 @@ sudoCommandHandler = function(params, extensionMediator)
 
     if shell isa Error then return shell
 
-    session = sessionManager.addSession(shell, { "ip": handler.ip })
+    session = sessionManager.addSession(Session.WrapShell(shell))
     sessionManager.setCurrentSession(sessionManager.getSessionIndex(session))
 
     return "Logged in"
@@ -1276,13 +1276,13 @@ msfconsoleCommandHandler = function(params, extensionMediator)
     if shells isa Error then return shells
     if shells.len() == 0 then return Error.New("No shells available")
     handleShellsToSession = function (shell)
-        return Session.New(shell, {})
+        return Session.WrapShell(shell)
     end function
     viperUi.msfConsole(Fn.map(shells, @handleShellsToSession))
     input = user_input(viperUi.msfConsoleInput)
     inputNumber = to_int(input)
     if inputNumber >= shells.len() or typeof(inputNumber) == "string" or inputNumber < 0 then return Error.New("Invalid input") 
-    session = Session.New(shells[inputNumber], {})
+    session = Session.WrapShell(shells[inputNumber])
     sessionManager = extensionMediator.getExtension("sessionManager")
     sessionManager.addSession(session)
     sessionManager.setCurrentSession(sessionManager.getSessionIndex(session))

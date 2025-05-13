@@ -13,6 +13,7 @@
 // #import DictionaryManager from "/managers/dictionary/dictionary-manager.src"
 #import ConfigManager from "/managers/config/config-manager.src"
 #import Printer from "/new/printer.gs" 
+#import Shell from "/facades/computer-objects/shell.src";
 
 #import WiFiLSCMD from "/cmd/viper/cmd/wifils.gs"
 #import WiFiCrackCMD from "/cmd/viper/cmd/wificrack.gs"
@@ -49,7 +50,7 @@ commandManager.registerCommand(WiFiCrackCMD.New(viperUi, sessionManager, themeMa
 commandManager.registerCommand(ExploitScanCMD.New(viperUi, sessionManager, themeManager, libManager, printer, configManager, metaxploitManager))
 
 init = function()
-    sessionManager.addSession(get_shell())
+    sessionManager.addSession(Session.WrapShell(Shell.New(get_shell())))
     metaxploit = sessionManager.currentSession.handler.getFile("metaxploit.so")
     if metaxploit isa Error then metaxploit = sessionManager.currentSession.handler.getFile("/lib/metaxploit.so")
     if not (metaxploit isa Error) then
