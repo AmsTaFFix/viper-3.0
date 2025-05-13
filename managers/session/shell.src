@@ -6,21 +6,36 @@
 
 ShellSession = new ComputerSession
 ShellSession.shell = null
+
+ShellSession.New = function(shell)
+    result = new self
+    result.shell = shell
+    result.computer = shell.getComputer()
+    result.root = climbFileToRoot(result.computer.getFile("/"))
+    result.current = result.computer.getFile("/")
+    result.user = getUserFromHandler(result)
+
+    return result
+end function
+
 ShellSession.buildFile = function(path, pathOfNewFile)
     file = self.getFile(path)
     if file isa Error then return file
     return self.shell.buildFile(file.path, pathOfNewFile)
 end function
+
 ShellSession.executeFile = function(path, params = "")
     file = self.getFile(path)
     if file isa Error then return file
     return self.shell.executeFile(file.path, params)
 end function
+
 ShellSession.connectTo = function(ip, port, username, password, service)
     connectedShell = self.shell.connectTo(ip, port, username, password, service)
     if connectedShell isa Error then return connectedShell
     return ShellSession.New(connectedShell)
 end function
+
 ShellSession.getFileFrom = function(path, targetPath, otherSession)
     folder = self.getFile(path)
     if folder isa Error then return folder
@@ -30,6 +45,7 @@ ShellSession.getFileFrom = function(path, targetPath, otherSession)
     if file.type != "FILE" then return Error.New("Target path is not a file")
     return otherSession.shell.transferFile(file.path(), folder.path(), self.shell)
 end function
+
 ShellSession.putFileTo = function(path, targetPath, otherSession)
     file = self.getFile(path)
     if file isa Error then return file
@@ -39,21 +55,14 @@ ShellSession.putFileTo = function(path, targetPath, otherSession)
     if folder.type != "FOLDER" then return Error.New("Target path is not a folder")
     return self.shell.transferFile(file.path(), folder.path(), otherSession.shell)
 end function
+
 ShellSession.activate = function()
     self.shell.activate()
 end function
+
 ShellSession.type = function()
     return "shell"
 end function
-ShellSession.New = function(shell)
-    result = new ShellSession
-    result.shell = shell
-    result.computer = shell.getComputer()
-    result.root = climbFileToRoot(result.computer.getFile("/"))
-    result.current = result.computer.getFile("/")
-    result.user = getUserFromHandler(result)
 
-    return result
-end function
 
 module.exports = ShellSession

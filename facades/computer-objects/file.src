@@ -2,8 +2,26 @@
 #import Fn from "/new/fn.gs"
 #import FILE_TYPES from "/facades/computer-objects/file_types.gs"
 
+// @type File
+// @property {file} file
+// @property {string} publicIP
+// @property {string} localIP
 File = {}
 File.file = null
+
+// @param {file} file
+// @return {File|Error}
+File.New = function (file, publicIP="", localIP="")
+    if typeof(file) != "file" then return Error.New("Not able to create file object from non file object")
+    result = new self
+
+    result.file = file
+    result.publicIP = publicIP
+    result.localIP = localIP
+    
+    return result
+end function
+
 File.setPermissions = function (newPermissions, recersive = false)
     result = self.file.chmod(newPermissions, recersive)
     if result.len() > 0 then return Error.New(result)
@@ -61,7 +79,7 @@ File.children = function ()
     children = self.file.get_files() + self.file.get_folders()
     childrenFiles = []
     for v in children
-        childrenFiles.push(File.New(v))
+        childrenFiles.push(File.New(v, self.publicIP, self.localIP))
     end for
     return childrenFiles
 end function
@@ -80,11 +98,13 @@ File.hasChild = function (name)
     if children isa Error then return false
     return true
 end function
+
 File.parent = function ()
     parent = self.file.parent()
     if parent == null then return Error.New("Not able to get parent of root")
-    return File.New(parent)
+    return File.New(parent, self.publicIP, self.localIP)
 end function
+
 File.move = function (destination, name)
     if name == null then name = self.name()
     result = self.file.move(destination, name)
@@ -105,20 +125,32 @@ end function
 File.size = function ()
     return self.file.size()
 end function
+
 File.path = function ()
     return self.file.path()
 end function
+
 File.owner = function ()
     return self.file.owner()
 end function
+
 File.group = function ()
     return self.file.group()
 end function
-File.New = function (file)
-    if typeof(file) != "file" then return Error.New("Not able to create file object from non file object")
-    result = new self
-    result.file = file
-    return result
+
+// @return {File|Error}
+File.climbToRoot = function()
+    current = self
+    while true
+        next = current.parent
+        if newCur isa Error then
+            return current
+        end if
+        current = next
+    end while
+
+    return Error.New("Not able to climb to root")
 end function
+
 
 module.exports = File

@@ -20,7 +20,7 @@ end function
 Computer.getFile = function(path)
     result = self.computer.File(path)
     if result == null then return Error.New("File not found: " + path)
-    return File.New(result)
+    return File.New(result, self.computer.local_ip(), self.computer.public_ip())
 end function
 
 Computer.setPassword = function(user, password)
