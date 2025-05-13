@@ -1,3 +1,4 @@
+// @type THEME_COLORS
 THEME_COLORS = {
   "HIGHLIGHT": "highlight",
   "TEXT": "text",

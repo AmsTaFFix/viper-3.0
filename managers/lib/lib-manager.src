@@ -5,6 +5,7 @@
 #import LIB_TYPES from "/managers/lib/lib_types.gs"
 #import Lib from "/managers/lib/lib.gs"
 
+// @type LibManager
 LibManager = {}
 LibManager.mediator = null
 LibManager.libs = []

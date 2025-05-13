@@ -7,11 +7,14 @@
 #import ComputerSession from "/managers/session/computer.src"
 #import ShellSession from "/managers/session/shell.src"
 
+// @type Session
+// @property {File|Computer|Shell} handler
 Session = {}
 Session.handler = null
 Session.data = {
     "ip": null
 }
+// @return {Session|Error}
 Session.New = function (handler, data)
     if handler isa Session then return handler
     result = new Session

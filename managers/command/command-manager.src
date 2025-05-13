@@ -84,6 +84,9 @@ CommandManager.printCommandResult = function(result)
     end if
 end function
 CommandManager.registerCommand = function(command)
+    if not command then
+        Error.panic("command is null", #filename, #line)
+    end if
     self.commands[command.name] = command
 end function
 CommandManager.unregisterCommand = function(command)

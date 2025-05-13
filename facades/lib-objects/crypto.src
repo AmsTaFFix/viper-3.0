@@ -1,12 +1,17 @@
 #import Error from "/new/error.gs"
 
+// @type Crypto
+// @property {cryptoLib} crypto
 Crypto = {}
 Crypto.crypto = null
+
 Crypto.decipher = function(str)
     result = self.crypto.decipher(str)
     if result == null then return Error.New("Decipher failed")
     return result
 end function
+
+// @param {cryptoLib} object
 Crypto.New = function(object)
     if typeof(object) != "cryptoLib" then return Error.New("Invalid crypto object")
     result = new Crypto

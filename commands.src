@@ -562,7 +562,6 @@ exploitScanCommandHandler = function(params, extensionMediator)
 
     metaxploitManager = extensionMediator.getExtension("metaxploitManager")
     objects = metaxploitManager.hack(address, port, options)
-
     if objects isa Error then return objects
 
     if not is_valid_ip(address) then

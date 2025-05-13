@@ -7,7 +7,11 @@ Metaxploit.metaxploit =  null
 Metaxploit.rShellList = function ()
     objects = self.metaxploit.rshell_server()
     if typeof(objects) == "string" then return Error.New(objects)
-    return Fn.map(objects, @computerObjectFactory)
+    copmuterObjs = []
+    for v in objects
+        copmuterObjs.push(computerObjectFactory(v))
+    end for
+    return copmuterObjs
 end function
 Metaxploit.connectRShell = function (address, port)
     if not is_valid_ip(address) then return Error.New("Invalid IP address")

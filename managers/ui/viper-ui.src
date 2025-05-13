@@ -39,9 +39,11 @@ viperCoolText = "
 <color=#343434>#</color> <color=#fff>Created by: <s>Volk</s> SkidMall</color>                      <color=#343434>#</color>
 <color=#343434>##################################################</color>"
 
+// @type ViperUi
 ViperUi = {}
 ViperUi.singleton = null
 ViperUi.mediator = null
+
 ViperUi.ls = function(children)
   themeManager = self.mediator.getExtension("themeManager")
 
@@ -65,10 +67,10 @@ ViperUi.ls = function(children)
       "text": item.name,
       "color": @themeManager.color(THEME_COLORS.INFO),
     }
-    if item.type == "FILE" then result.name.color = @themeManager.color(THEME_COLORS.SECONDARY)
+    if item.type == "FILE" then result.name.color = @themeManager.color(THEME_COLORS.TEXT)
     result.size = {
       "text": item.size,
-      "color": @themeManager.color(THEME_COLORS.SECONDARY),
+      "color": @themeManager.color(THEME_COLORS.TEXT),
     }
     return result
   end function
@@ -78,6 +80,7 @@ ViperUi.ls = function(children)
 
   print
 end function
+
 ViperUi.targets = function(sessions)
   themeManger = self.mediator.getExtension("themeManager")
 
@@ -476,15 +479,17 @@ ViperUi.displaySession = function(session)
   ip = session.data.ip
   name = "file"
   if handler.type != "file" then name = handler.name
-  result = "<color=" + COLORS.GRAY + "><pos=4.95>———(" + handler.user + "@" + "<color=" + COLORS.RED + ">" + name + "</color>" + ")——[" + "<color=" + COLORS.RED + ">" + ip.public + "</color>" + "]——[" + ip.local + "]——[" + "<color=" + COLORS.RED + ">" + handler.path + "</color>" + "]——[" + "<color=" + COLORS.GREEN + ">" + handler.type + "</color>" + "]<voffset=-0.35em><pos=0><rotate=90>—<pos=0><voffset=-0.7em>—<pos=0><voffset=-1.05em>—<rotate=0><pos=4.95><voffset=-1.4em>——<#c3201f>$</color></color> "
+  result = "<color=" + COLORS.WHITE + "><pos=4.95>———(" + handler.user + "@" + "<color=" + COLORS.RED + ">" + name + "</color>" + ")——[" + "<color=" + COLORS.RED + ">" + ip.public + "</color>" + "]——[" + ip.local + "]——[" + "<color=" + COLORS.RED + ">" + handler.path + "</color>" + "]——[" + "<color=" + COLORS.GREEN + ">" + handler.type + "</color>" + "]<voffset=-0.35em><pos=0><rotate=90>—<pos=0><voffset=-0.7em>—<pos=0><voffset=-1.05em>—<rotate=0><pos=4.95><voffset=-1.4em>——<#c3201f>$</color></color> "
   return result
 end function
+
 ViperUi.init = function
   print(viperCoolText)
   print
-  print("<color=" + COLORS.GRAY + ">" + "<color=" + COLORS.RED + ">" + "Version" + "</color>" + ": " + "<color=" + COLORS.GREEN + ">" + "3.1.7" + "</color>" + "</color>")
+  print("<color=" + COLORS.WHITE + ">" + "<color=" + COLORS.RED + ">" + "Version" + "</color>" + ": " + "<color=" + COLORS.GREEN + ">" + "3.1.7" + "</color>" + "</color>")
   print
 end function
+
 ViperUi.displayTable = function(keys, items)
   themeManger = self.mediator.getExtension("themeManager")
   longestItemPerKey = {}
@@ -524,6 +529,7 @@ ViperUi.displayTable = function(keys, items)
     print(string)
   end for
 end function
+
 ViperUi.history = function(commands)
   themeManager = self.mediator.getExtension("themeManager")
   keys = [

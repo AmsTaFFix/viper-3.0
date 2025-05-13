@@ -7,9 +7,14 @@ Error.message = ""
 // @param {string} message
 // @return {Error}
 Error.New = function(message)
-    result = new self
-    result.message = message
-    return result
+  result = new self
+  result.message = message
+  return result
 end function
+
+Error.panic = function(message, filename = "unknown.gs", line = "0")
+  exit("[" + filename + ":" + line + "] " + message)
+end function
+
 
 module.exports = Error

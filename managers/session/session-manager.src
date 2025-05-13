@@ -3,6 +3,8 @@
 #import Session from "/managers/session/session.src"
 
 // @type SessionManager
+// @property {Session} currentSession
+// @property {Session[]} sessions
 SessionManager = {}
 SessionManager.mediator = null
 SessionManager.sessions = []
@@ -18,6 +20,7 @@ SessionManager.addSession = function (object, data)
     if self.pivotSession == null then self.setPivotSession(0)
     return session
 end function
+
 SessionManager.removeSession = function (sessionIndex)
     i = 0
     handleFilterSession = function (s)
@@ -27,6 +30,7 @@ SessionManager.removeSession = function (sessionIndex)
     end function
     self.sessions = Fn.filter(self.sessions, @handleFilterSession)
 end function
+
 SessionManager.setCurrentSession = function (sessionIndex)
     if hasIndex(self.sessions, sessionIndex) then
         self.currentSession = self.sessions[sessionIndex]
@@ -35,6 +39,7 @@ SessionManager.setCurrentSession = function (sessionIndex)
         return Error.New("Session Index(" + sessionIndex + ") is out of range")
     end if
 end function
+
 SessionManager.setPivotSession = function (sessionIndex)
     if hasIndex(self.sessions, sessionIndex) then
         self.pivotSession = self.sessions[sessionIndex]
@@ -42,9 +47,11 @@ SessionManager.setPivotSession = function (sessionIndex)
         return Error.New("Session Index(" + sessionIndex + ") is out of range")
     end if
 end function
+
 SessionManager.getSessionIndex = function (session)
     return indexOf(self.sessions, session)
 end function
+
 SessionManager.goBack = function ()
     if self.sessionChain.len > 1 then
         self.sessionChain.pop()
@@ -53,6 +60,7 @@ SessionManager.goBack = function ()
         exit()
     end if
 end function
+
 SessionManager.setMediator = function (mediator)
     self.mediator = mediator
 end function

@@ -12,8 +12,14 @@
 #import ThemeManager from "/managers/theme/theme-manager.src"
 // #import DictionaryManager from "/managers/dictionary/dictionary-manager.src"
 #import ConfigManager from "/managers/config/config-manager.src"
+#import Printer from "/new/printer.gs" 
+
+#import WiFiLSCMD from "/cmd/viper/cmd/wifils.gs"
+#import WiFiCrackCMD from "/cmd/viper/cmd/wificrack.gs"
+
+// quickfix
+#import computerObjectFactory from "/facades/computer-objects/computer-object-factory.src"
 #import THEME_COLORS from "/managers/theme/theme_colors.gs"
-#import WiFiNetworksCMD from "/cmd/viper/cmd/wifi_networks.gs"
 
 extensionMediator = ExtensionMediator.New()
 
@@ -35,9 +41,10 @@ viperUi = ViperUi.New()
 extensionMediator.addExtension("viperUi", viperUi)
 configManager = ConfigManager.New()
 extensionMediator.addExtension("configManager", configManager)
-
+printer = Printer.New(themeManager)
 import_code("/commands.src")
-commandManager.registerCommand(WiFiNetworksCMD.New(viperUi, sessionManager))
+commandManager.registerCommand(WiFiLSCMD.New(viperUi, sessionManager, themeManager))
+commandManager.registerCommand(WiFiCrackCMD.New(viperUi, sessionManager, themeManager, libManager, printer, configManager))
 
 init = function()
     viperUi = extensionMediator.getExtension("viperUi")

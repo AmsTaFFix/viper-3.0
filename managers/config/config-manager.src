@@ -1,6 +1,7 @@
 #import Error from "/new/error.gs"
 #import JSON from "/libs/json.src"
 
+// @type ConfigManager
 ConfigManager = {}
 ConfigManager.mediator = null
 ConfigManager.config = null
