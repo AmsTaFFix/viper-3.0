@@ -17,6 +17,21 @@ LibManager.pivotLibs = {
     LIB_TYPES.METAXPLOIT: null,
     LIB_TYPES.CRYPTO: null
 }
+
+LibManager.New = function()
+    result = new LibManager
+    result.libs = []
+    result.currentLibs = {
+        LIB_TYPES.METAXPLOIT: null,
+        LIB_TYPES.CRYPTO: null
+    }
+    result.pivotLibs = {
+        LIB_TYPES.METAXPLOIT: null,
+        LIB_TYPES.CRYPTO: null
+    }
+    return result
+end function
+
 LibManager.addLib = function(lib, data)
     lib = Lib.New(lib, data)
     if lib isa Error then return lib
@@ -40,37 +55,31 @@ LibManager.addLib = function(lib, data)
         end for
     end if
 end function
+
 LibManager.getLib = function(id)
     if self.libs.hasIndex(id) then return self.libs[id]
     return Error.New("Lib with id " + id + " not found")
 end function
+
 LibManager.getCurrentLib = function(libType)
     return self.currentLibs[libType]
 end function
+
 LibManager.setCurrentLib = function(lib)
     self.currentLibs[lib.type] = lib
 end function
+
 LibManager.getPivotLib = function(libType)
     return self.pivotLibs[libType]
 end function
+
 LibManager.setPivotLib = function(libType, lib)
     self.pivotLibs[libType] = lib
 end function
+
 LibManager.setMediator = function (mediator)
     self.mediator = mediator
 end function
-LibManager.New = function()
-    result = new LibManager
-    result.libs = []
-    result.currentLibs = {
-        LIB_TYPES.METAXPLOIT: null,
-        LIB_TYPES.CRYPTO: null
-    }
-    result.pivotLibs = {
-        LIB_TYPES.METAXPLOIT: null,
-        LIB_TYPES.CRYPTO: null
-    }
-    return result
-end function
+
 
 module.exports = LibManager

@@ -12,6 +12,7 @@ SessionManager.sessionChain = []
 SessionManager.currentSession = null
 SessionManager.pivotSession = null
 
+// @param {Session|File|Computer|Shell} object
 SessionManager.addSession = function (object, data)
     session = Session.New(object, data)
     if session isa Error then return session
@@ -67,10 +68,12 @@ end function
 
 // @return {SessionManager}
 SessionManager.New = function ()
-    result = new SessionManager
-    result.sessions = []
-    result.sessionChain = []
-    return result
+    obj = new self
+
+    obj.sessions = []
+    obj.sessionChain = []
+    
+    return obj
 end function
 
 module.exports = SessionManager
