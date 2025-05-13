@@ -9,8 +9,6 @@ Computer = {}
 // @param {computer} computer
 // @return {Computer|Error}
 Computer.New = function(computer)
-    computer.create_group
-
     if typeof(computer) != "computer" then return Error.New("Invalid computer object")
     obj = new self
 
